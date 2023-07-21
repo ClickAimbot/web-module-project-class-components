@@ -2,6 +2,7 @@ import React from 'react';
 
 import TodoList from './TodoList';
 import Form from './Form';
+import Todo from './Todo';
 
 export default class App extends React.Component {
   constructor() {
@@ -31,7 +32,7 @@ export default class App extends React.Component {
         <ul>
           {
             todos.map(todo => {
-              return (<li>{todo.task} { todo.completed ? <span> - completed</span> : <span></span> }</li>)
+              return (<Todo todo={todo} />)
             })
           }
         </ul>
