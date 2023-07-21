@@ -22,13 +22,13 @@ export default class App extends React.Component {
     }
   }
 
-  handleAdd = () => {
+  handleAdd = (task) => {
     // setState
     // change todos
     // make a copy of todos
     // add a new todo to the end
     const newTodo = {
-      task: "Cook things",
+      task: task,
       id: Date.now(), 
       completed: false
     }
@@ -51,13 +51,34 @@ export default class App extends React.Component {
     });
   }
 
+  handleToggle = (clickedId) => {
+    // setState
+    // change todos
+    // find the todo that we click on
+    // flip the value of completed for that todo
+    // keep all other todos the same
+    this.setState({
+      ...this.state,
+      todos: this.state.todos.map(todo => {
+        if (todo.id === clickedId) {
+          return {
+            ...todo,
+            completed: !todo.completed
+          }
+        } 
+
+        return todo
+      })
+    })
+  }
+
   render() {
     const { todos } = this.state;
     
     return (
       <div>
         <h1>Todos</h1>
-        <TodoList todos={todos} />
+        <TodoList handleToggle={this.handleToggle} todos={todos} />
         <Form handleAdd={this.handleAdd} />
         <button onClick={this.handleClear}>Clear</button>
       </div>
