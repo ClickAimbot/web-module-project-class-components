@@ -62,9 +62,6 @@ export default class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <div className="header">
-          <h1>T</h1>
-        </div>
         <TodoList toggleTodo='' thingsTodo={this.state.thingsTodo} />
       </div>
     )
