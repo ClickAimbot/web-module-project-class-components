@@ -21,6 +21,20 @@ export default class App extends React.Component {
       ]
     }
   }
+
+  handleClear = () => {
+    // Set State
+    // loop through (filter) all todos
+    // remove all todos that have completed === true
+    // save filtered todos to state
+    this.setState({
+      ...this.state,
+      todos: this.state.todos.filter(todo => {
+        return (todo.completed === false);
+      })
+    });
+  }
+
   render() {
     const { todos } = this.state;
     
@@ -29,7 +43,7 @@ export default class App extends React.Component {
         <h1>Todos</h1>
         <TodoList todos={todos}/>
         <Form />
-        <button>Clear</button>
+        <button onClick={this.handleClear}>Clear</button>
       </div>
     )
   }
