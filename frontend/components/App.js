@@ -3,66 +3,43 @@ import React from 'react';
 import TodoList from './TodoList';
 import Form from './Form';
 
-const thingsTodo = [
-  {
-    name: "Hike",
-    id:1,
-    completed: false
-  },
-  {
-    name: "Weight-train",
-    id:2,
-    completed: false
-  },
-  {
-    name: "Mealprep",
-    id:3,
-    completed: false
-  },
-  {
-    name: "Clean",
-    id:4,
-    completed: false
-  }
-]
-
 export default class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      thingsTodo: thingsTodo
+      todos: [
+        {
+          task: 'Organize Garage',
+          id: 1528817077286, // could look different, you could use a timestamp to generate it
+          completed: false
+        },
+        {
+          task: 'Bake Cookies',
+          id: 1528817084358,
+          completed: false
+        }
+      ]
     }
   }
-
-  addTodo = (e, todo) => {
-    e.preventDefault();
-    const newTodo = {
-      name: todo,
-      id: Date.now(),
-      completed: false
-    }
-    this.setState({...this.state, thingsTodo: [...this.state.thingsTodo, newTodo]});
-  }
-  toggleTodo = todoId => {
-    console.log(todoId);
-    this.setState({...this.state, thingsTodo: this.state.thingsTodo.map(todo => {
-      if (todo.id === todoId) {
-        return {...todo, completed: !todo.completed}
-      }
-      return todo
-    })})
-  }
-
-  completedTodo = () => {
-    this.setState({...this.state, thingsTodo: this.state.thingsTodo.filter(todo => {
-      if (!todo.completed) return todo;
-    })})
-  }
-
   render() {
+    const { todos } = this.state;
+    console.log(todos);
+
     return (
-      <div className="App">
-        <TodoList toggleTodo='' thingsTodo={this.state.thingsTodo} />
+      <div>
+        <h1>Todos</h1>
+        <ul>
+          {
+            todos.map(todo => {
+              return (<li>{todo.task} { todo.completed ? <span> - completed</span> : <span></span> }</li>)
+            })
+          }
+        </ul>
+        <form>
+          <input></input>
+          <button>Add</button>
+        </form>
+        <button>Clear</button>
       </div>
     )
   }
